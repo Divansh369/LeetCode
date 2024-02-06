@@ -1,15 +1,19 @@
 class Solution {
 public:
-    vector<int> twoSum(vector<int>& nums, int target) {
-        vector<int> sol;
-        for (int i=0;i<nums.size()-1;i++){
-            for (int j=i+1;j<nums.size();j++){
-                if (nums[i]+nums[j]==target){
-                    sol.push_back(i);sol.push_back(j);
-                    return sol;
-                }
+    std::vector<int> twoSum(std::vector<int>& nums, int target) {
+        std::unordered_map<int, int> hash_map;
+        std::vector<int> sol;
+        
+        for (int i = 0; i < nums.size(); ++i) {
+            int complement = target - nums[i];
+            if (hash_map.find(complement) != hash_map.end()) {
+                sol.push_back(hash_map[complement]);
+                sol.push_back(i);
+                return sol;
             }
+            hash_map[nums[i]] = i;
         }
+        
         return sol;
     }
 };
